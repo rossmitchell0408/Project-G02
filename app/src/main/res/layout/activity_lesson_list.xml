@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/tvTitle"
@@ -19,8 +18,8 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spnLessons"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLesson"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp" />
 </LinearLayout>
