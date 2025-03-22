@@ -18,4 +18,22 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPercent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Percent completed goes here"/>
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"/>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete all data" />
 </LinearLayout>
