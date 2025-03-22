@@ -14,13 +14,12 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome Back Screen"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvPercent"
+        android:id="@+id/tvCompletion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Percent completed goes here"/>
