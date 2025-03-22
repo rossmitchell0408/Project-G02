@@ -18,4 +18,29 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Length: ..."/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description goes here"/>
+
+    <Button
+        android:id="@+id/btnWatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Watch Lesson"/>
+
+    <Button
+        android:id="@+id/btnComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mark Complete"/>
+
 </LinearLayout>
