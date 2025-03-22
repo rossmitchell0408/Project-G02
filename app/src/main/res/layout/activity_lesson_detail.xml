@@ -14,7 +14,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Name Screen"
+        android:text="Lesson Detail Screen"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
