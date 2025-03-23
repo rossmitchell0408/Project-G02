@@ -5,5 +5,5 @@
     <stroke android:color="@android:color/transparent" />
     <stroke
         android:width="2sp"
-        android:color="@color/material_dynamic_primary70" />
+        android:color="@color/black"/>
 </shape>

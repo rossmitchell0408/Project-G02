@@ -3,7 +3,6 @@ package com.example.project_g02
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project_g02.databinding.ActivityWelcomeBackBinding
 import com.example.project_g02.models.User
@@ -33,10 +32,6 @@ class WelcomeBackActivity : AppCompatActivity() {
         }
         val userJson = sharedPreferences.getString("loggedUser", null)
         val user = userJson.let { gson.fromJson(it, User::class.java) }
-        Log.d(
-            "Testing GSON output",
-            "${user.name} - ${user.completed} - ${user.completed[user.completed.size - 1]}"
-        )
 
         binding.tvTitle.text = "Welcome back ${user.name}"
 
@@ -61,9 +56,8 @@ class WelcomeBackActivity : AppCompatActivity() {
 
         binding.btnContinue.setOnClickListener {
             val intent = Intent(this,LessonListActivity::class.java)
-            intent.putExtra("complete",user.completed)
+            intent.putExtra("userJson",userJson)
             startActivity(intent)
-            finish()
         }
 
         binding.btnDelete.setOnClickListener {

@@ -1,19 +1,29 @@
 package com.example.project_g02.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_g02.databinding.LessonLayoutBinding
 import com.example.project_g02.models.Lesson
-import com.example.project_g02.singletons.Lessons
 
-class LessonAdapter(private val complete: BooleanArray) :
-    RecyclerView.Adapter<LessonAdapter.ViewHolder>() {
-    val lessons = Lessons
+class LessonAdapter(
+    private val lessons: List<Lesson>,
+    private val complete: BooleanArray,
+    private val onItemClick: (Int) -> Unit //Click listener lambda used to notify host activity about clicks
+) : RecyclerView.Adapter<LessonAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: LessonLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
+        init {
+            //When the ViewHolder is first initialized, set a click listener on each item's root view
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(position) //Send back clicked position to host
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,11 +33,13 @@ class LessonAdapter(private val complete: BooleanArray) :
     }
 
     override fun getItemCount(): Int {
-        return lessons.lessonList.size
+        return lessons.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val lesson: Lesson = this.lessons.lessonList[position]
+        Log.e("Lessons Adapter Pos: $position", "Called")
+        val lesson: Lesson = this.lessons[position]
+
         holder.binding.lessonNum.text = "${position + 1}"
 
         holder.binding.lessonTitle.text = lesson.name
@@ -36,5 +48,6 @@ class LessonAdapter(private val complete: BooleanArray) :
         if (complete[position]) {
             holder.binding.lessonCheck.visibility = android.view.View.VISIBLE
         }
+
     }
 }
