@@ -51,10 +51,7 @@ class LessonDetailActivity : AppCompatActivity() {
     //
     //Handle what to do if position is somehow -1 (Shouldnt ever happen? Might be more eloquent way of handling this)
 
-        // Temp used to check if lesson is complete while looking at the lesson
         binding.btnWatch.setOnClickListener {
-            //binding.tvTest.text = position.toString()
-            binding.tvTest.text = user.completed[position].toString()
 
         }
         binding.btnComplete.setOnClickListener {
@@ -62,7 +59,8 @@ class LessonDetailActivity : AppCompatActivity() {
             sharedPreferences.edit() {
                 putString("loggedUser", gson.toJson(user))
             }
-
+            val intent = Intent(this,LessonListActivity::class.java)
+            startActivity(intent)
         }
         binding.btnBack.setOnClickListener {
             val intent = Intent(this,LessonListActivity::class.java)
