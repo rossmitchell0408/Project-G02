@@ -58,6 +58,11 @@ class LessonListActivity : AppCompatActivity() {
         )
         Log.d(TAG, "After recycler view")
 
+        binding.btnBack.setOnClickListener {
+            startActivity(Intent(this, WelcomeBackActivity::class.java))
+            finish()
+        }
+
     }
     private fun isLogged(): Boolean {
         return sharedPreferences.getString("loggedUser", null) != null
