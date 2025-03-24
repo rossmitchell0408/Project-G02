@@ -1,17 +1,17 @@
 package com.example.project_g02.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_g02.databinding.LessonLayoutBinding
 import com.example.project_g02.models.Lesson
+import com.example.project_g02.singletons.Lessons
 
 class LessonAdapter(
-    private val lessons: List<Lesson>,
     private val complete: BooleanArray,
     private val onItemClick: (Int) -> Unit //Click listener lambda used to notify host activity about clicks
 ) : RecyclerView.Adapter<LessonAdapter.ViewHolder>() {
+    private val lessonList = Lessons.lessonList
 
     inner class ViewHolder(val binding: LessonLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,15 +33,13 @@ class LessonAdapter(
     }
 
     override fun getItemCount(): Int {
-        return lessons.size
+        return lessonList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.e("Lessons Adapter Pos: $position", "Called")
-        val lesson: Lesson = this.lessons[position]
+        val lesson: Lesson = this.lessonList[position]
 
         holder.binding.lessonNum.text = "${position + 1}"
-
         holder.binding.lessonTitle.text = lesson.name
         holder.binding.lessonDuration.text = lesson.getTime()
 

@@ -21,33 +21,34 @@ class LessonListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLessonListBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var gson: Gson
+    private val TAG = "LessonListActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val TAG = "LessonListOnCreate"
         super.onCreate(savedInstanceState)
         binding = ActivityLessonListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val lessons = Lessons
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         gson = Gson()
 
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         if (!isLogged()) {
+            Log.d(TAG, "User not logged in, sending back to login screen.")
             //If the user somehow ended up here without being logged in, send back to login screen
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
         val userJson = sharedPreferences.getString("loggedUser", null)
         val user = userJson.let { gson.fromJson(it, User::class.java) }
-
         val lessonAdapter =
-            LessonAdapter(lessons.lessonList, user.completed) { position ->
+            LessonAdapter(user.completed) { position ->
                 //This lambda function will run when it receives the clicked position from the Adapter
-                val lessonJson = gson.toJson(lessons.lessonList[position])
+                val lessonJson = gson.toJson(Lessons.lessonList[position])
                 val intent = Intent(this, LessonDetailActivity::class.java)
                 intent.putExtra("lessonJson", lessonJson)
-                intent.putExtra("lessonIndex", position)
+                intent.putExtra("lessonIndex", position+1)
                 startActivity(intent)
             }
+
         binding.rvLesson.adapter = lessonAdapter
         binding.rvLesson.layoutManager = LinearLayoutManager(this)
         binding.rvLesson.addItemDecoration(
@@ -56,14 +57,15 @@ class LessonListActivity : AppCompatActivity() {
                 LinearLayoutManager.VERTICAL
             )
         )
-        Log.d(TAG, "After recycler view")
 
+        ///On Click Handler///
         binding.btnBack.setOnClickListener {
             startActivity(Intent(this, WelcomeBackActivity::class.java))
             finish()
         }
 
     }
+
     private fun isLogged(): Boolean {
         return sharedPreferences.getString("loggedUser", null) != null
     }
