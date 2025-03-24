@@ -9,6 +9,7 @@ import androidx.core.net.toUri
 import com.example.project_g02.databinding.ActivityLessonDetailBinding
 import com.example.project_g02.models.Lesson
 import com.example.project_g02.models.User
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 class LessonDetailActivity : AppCompatActivity() {
@@ -44,17 +45,19 @@ class LessonDetailActivity : AppCompatActivity() {
         binding.tvTime.text = lesson.getTime()
         binding.tvDescription.text = lesson.description
 
-    //TODO
-    //Handle what to do if position is somehow -1 (Shouldnt ever happen? Might be more eloquent way of handling this)
-
         binding.btnWatch.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW,
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ".toUri())
             startActivity(intent)
         }
         binding.btnComplete.setOnClickListener {
-
-
+            if (position == -1) {
+                val snackbar = Snackbar.make(binding.root, "ERROR: Please select course again", Snackbar.LENGTH_SHORT)
+                snackbar.show()
+                val intent = Intent(this,WelcomeBackActivity::class.java)
+                startActivity(intent)
+                return@setOnClickListener
+            }
 
             user.completed[position] = true
             sharedPreferences.edit() {
