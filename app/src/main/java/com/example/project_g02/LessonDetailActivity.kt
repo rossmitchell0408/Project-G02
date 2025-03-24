@@ -45,11 +45,6 @@ class LessonDetailActivity : AppCompatActivity() {
         binding.tvDescription.text = lesson.description
 
     //TODO
-    //Mark complete in user info (pull loggedUser from sharedPrefs,
-    //  convert to User, set proper completed flag, convert back to json, saved to sharedPrefs)
-    //
-    //Intent to open link on btn click (pull link from lesson)
-    //
     //Handle what to do if position is somehow -1 (Shouldnt ever happen? Might be more eloquent way of handling this)
 
         binding.btnWatch.setOnClickListener {
@@ -58,6 +53,9 @@ class LessonDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnComplete.setOnClickListener {
+
+
+
             user.completed[position] = true
             sharedPreferences.edit() {
                 putString("loggedUser", gson.toJson(user))
