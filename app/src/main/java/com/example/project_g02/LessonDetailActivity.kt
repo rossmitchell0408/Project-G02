@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
+import androidx.core.net.toUri
 import com.example.project_g02.databinding.ActivityLessonDetailBinding
 import com.example.project_g02.models.Lesson
 import com.example.project_g02.models.User
@@ -52,7 +53,9 @@ class LessonDetailActivity : AppCompatActivity() {
     //Handle what to do if position is somehow -1 (Shouldnt ever happen? Might be more eloquent way of handling this)
 
         binding.btnWatch.setOnClickListener {
-
+            val intent = Intent(Intent.ACTION_VIEW,
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ".toUri())
+            startActivity(intent)
         }
         binding.btnComplete.setOnClickListener {
             user.completed[position] = true
