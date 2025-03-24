@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.example.project_g02.databinding.ActivityLessonDetailBinding
 import com.example.project_g02.models.Lesson
 import com.example.project_g02.models.User
@@ -17,8 +18,6 @@ class LessonDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLessonDetailBinding
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var gson: Gson
-/*    private lateinit var userJson:String
-    private lateinit var user: User*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +35,8 @@ class LessonDetailActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        var userJson = sharedPreferences.getString("loggedUser", null)
+        val userJson = sharedPreferences.getString("loggedUser", null)
         val user = userJson.let { gson.fromJson(it, User::class.java) }
-/*        userJson = intent.getStringExtra("loggedUser")
-        user = gson.fromJson(userJson, User::class.java)*/
 
 
         binding.tvTitle.text = lesson.name
@@ -53,6 +50,8 @@ class LessonDetailActivity : AppCompatActivity() {
     //Intent to open link on btn click (pull link from lesson)
     //
     //Handle what to do if position is somehow -1 (Shouldnt ever happen? Might be more eloquent way of handling this)
+
+        // Temp used to check if lesson is complete while looking at the lesson
         binding.btnWatch.setOnClickListener {
             //binding.tvTest.text = position.toString()
             binding.tvTest.text = user.completed[position].toString()
@@ -60,10 +59,12 @@ class LessonDetailActivity : AppCompatActivity() {
         }
         binding.btnComplete.setOnClickListener {
             user.completed[position] = true
-            val editor = sharedPreferences.edit()
-            editor.putString("loggedUser", gson.toJson(user))
-            editor.apply()
+            sharedPreferences.edit() {
+                putString("loggedUser", gson.toJson(user))
+            }
 
+        }
+        binding.btnBack.setOnClickListener {
             val intent = Intent(this,LessonListActivity::class.java)
             startActivity(intent)
         }
