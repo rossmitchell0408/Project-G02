@@ -35,7 +35,7 @@ class WelcomeBackActivity : AppCompatActivity() {
 
         binding.tvTitle.text = "Welcome back ${user.name}"
 
-        var completed = 0
+        var completed:Double = 0.0
         for (lesson in user.completed) {
             if (lesson) {
                 completed++
@@ -43,7 +43,7 @@ class WelcomeBackActivity : AppCompatActivity() {
         }
 
         binding.tvCompletion.text = """
-            You've completed ${completed/user.completed.size}% of the course!
+            You've completed ${(completed/user.completed.size)*100}% of the course!
             
             Lessons completed: ${completed}
             Lessons remaining: ${user.completed.size-completed}
