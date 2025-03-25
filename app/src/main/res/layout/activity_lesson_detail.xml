@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".LessonDetailActivity">
-
-
-
 
     <TextView
         android:id="@+id/tvTitle"
+        style="@style/TextAppearance.Material3.HeadlineSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lesson Detail Screen"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Length: ..."/>
+        android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvTime"
+        style="@style/TextAppearance.Material3.LabelMedium"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description goes here"/>
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/tvDescription"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 
     <Button
         android:id="@+id/btnWatch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Watch Lesson"/>
+        android:layout_marginHorizontal="16dp"
+        android:text="Watch Lesson" />
 
-    <Button
-        android:id="@+id/btnComplete"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mark Complete"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back"/>
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Back" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/btnComplete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Mark Complete" />
+    </LinearLayout>
 </LinearLayout>

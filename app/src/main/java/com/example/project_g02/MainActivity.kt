@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity() {
             val userName = binding.etName.text.toString()
             if (userName.isNotBlank()) {
                 val user = User(
-                    userName,
-                    BooleanArray(Lessons.lessonList.size)
+                    userName, BooleanArray(Lessons.lessonList.size)
                 )
                 val userJson = gson.toJson(user)
                 with(sharedPreferences.edit()) {

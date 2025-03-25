@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_g02.adapters.LessonAdapter
 import com.example.project_g02.databinding.ActivityLessonListBinding
+import com.example.project_g02.interfaces.ClickDetectInterface
 import com.example.project_g02.models.User
 import com.example.project_g02.singletons.Lessons
 import com.google.gson.Gson
 
-class LessonListActivity : AppCompatActivity() {
+class LessonListActivity : AppCompatActivity(), ClickDetectInterface {
+
     companion object {
         private const val PREFS_NAME = "LessonPrefs"
     }
@@ -39,22 +41,13 @@ class LessonListActivity : AppCompatActivity() {
 
         val userJson = sharedPreferences.getString("loggedUser", null)
         val user = userJson.let { gson.fromJson(it, User::class.java) }
-        val lessonAdapter =
-            LessonAdapter(user.completed) { position ->
-                //This lambda function will run when it receives the clicked position from the Adapter
-                val lessonJson = gson.toJson(Lessons.lessonList[position])
-                val intent = Intent(this, LessonDetailActivity::class.java)
-                intent.putExtra("lessonJson", lessonJson)
-                intent.putExtra("lessonIndex", position+1)
-                startActivity(intent)
-            }
+        val lessonAdapter = LessonAdapter(user.completed, this)
 
         binding.rvLesson.adapter = lessonAdapter
         binding.rvLesson.layoutManager = LinearLayoutManager(this)
         binding.rvLesson.addItemDecoration(
             DividerItemDecoration(
-                this,
-                LinearLayoutManager.VERTICAL
+                this, LinearLayoutManager.VERTICAL
             )
         )
 
@@ -63,7 +56,16 @@ class LessonListActivity : AppCompatActivity() {
             startActivity(Intent(this, WelcomeBackActivity::class.java))
             finish()
         }
+    }
 
+    override fun lessonClick(position: Int) {
+        val lessonJson = gson.toJson(Lessons.lessonList[position])
+        Log.d(TAG, "lessonJson: $lessonJson")
+        val intent = Intent(this, LessonDetailActivity::class.java)
+        intent.putExtra("lessonJson", lessonJson)
+        intent.putExtra("lessonIndex", position)
+        Log.d(TAG, "Starting new activity.")
+        startActivity(intent)
     }
 
     private fun isLogged(): Boolean {

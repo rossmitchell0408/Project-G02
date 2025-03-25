@@ -38,9 +38,11 @@ class WelcomeBackActivity : AppCompatActivity() {
         if (intent.hasExtra("errorMessage")) {
             //If an errorMessage was passed to the activity (only from LessonDetailActivity at the moment)
             //display a snackbar with the error message.
-            Log.e(TAG,"Error received from: ${intent.getStringExtra("errorSource")}")
-            Log.e(TAG,"Error message: ${intent.getStringExtra("errorMessage")}")
-            Snackbar.make(binding.root, intent.getStringExtra("errorMessage").toString(), Snackbar.LENGTH_LONG).show()
+            Log.e(TAG, "Error received from: ${intent.getStringExtra("errorSource")}")
+            Log.e(TAG, "Error message: ${intent.getStringExtra("errorMessage")}")
+            Snackbar.make(
+                binding.root, intent.getStringExtra("errorMessage").toString(), Snackbar.LENGTH_LONG
+            ).show()
         }
 
         val userJson = sharedPreferences.getString("loggedUser", null)
@@ -58,17 +60,17 @@ class WelcomeBackActivity : AppCompatActivity() {
         //Casting complete to a Double in the top line to have the division properly resolve.
         //If completed stayed as an Int, the user would either have 0% or 100% progress, no in between.
         binding.tvCompletion.text = """
-            You've completed ${(completed.toDouble()/user.completed.size)*100}% of the course!
+            You've completed ${(completed.toDouble() / user.completed.size) * 100}% of the course!
             
             Lessons completed: ${completed}
-            Lessons remaining: ${(user.completed.size-completed)}
+            Lessons remaining: ${(user.completed.size - completed)}
         """.trimIndent()
 
 
         ///On Click Handlers///
         binding.btnContinue.setOnClickListener {
-            val intent = Intent(this,LessonListActivity::class.java)
-            intent.putExtra("userJson",userJson)
+            val intent = Intent(this, LessonListActivity::class.java)
+            intent.putExtra("userJson", userJson)
             startActivity(intent)
         }
 

@@ -35,8 +35,11 @@ class LessonDetailActivity : AppCompatActivity() {
             //log the error before sending the user back to Welcome Back Activity
             Log.e(TAG, "Invalid position received: $position")
             val intent = Intent(this, WelcomeBackActivity::class.java)
-            intent.putExtra("errorMessage","Invalid lesson position received. If this problem persists, please contact the application's author.")
-            intent.putExtra("errorSource",TAG)
+            intent.putExtra(
+                "errorMessage",
+                "Invalid lesson position received. If this problem persists, please contact the application's author."
+            )
+            intent.putExtra("errorSource", TAG)
             startActivity(intent)
             finish()
         }
