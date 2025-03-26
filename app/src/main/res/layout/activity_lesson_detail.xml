@@ -13,7 +13,8 @@
         style="@style/TextAppearance.Material3.HeadlineSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/tvTime"
