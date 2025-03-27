@@ -29,15 +29,18 @@ class WelcomeBackActivity : AppCompatActivity() {
         gson = Gson()
 
         if (!isLogged()) {
-            Log.d(TAG, "User not logged in, sending back to login screen.")
             //If the user somehow ended up here without being logged in, send back to login screen
-            startActivity(Intent(this, MainActivity::class.java))
+            Log.e(TAG, "User not logged in, sending back to login screen.")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("errorMessage", "You must be logged in to access this page.")
+            intent.putExtra("errorSource", TAG)
+            startActivity(intent)
             finish()
         }
 
         if (intent.hasExtra("errorMessage")) {
-            //If an errorMessage was passed to the activity (only from LessonDetailActivity at the moment)
-            //display a snackbar with the error message.
+            //If an errorMessage was passed to the activity display a snackbar with the error
+            //and log the activity the error came from.
             Log.e(TAG, "Error received from: ${intent.getStringExtra("errorSource")}")
             Log.e(TAG, "Error message: ${intent.getStringExtra("errorMessage")}")
             Snackbar.make(

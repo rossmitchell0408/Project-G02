@@ -37,6 +37,16 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        if (intent.hasExtra("errorMessage")) {
+            //If an errorMessage was passed to the activity display a snackbar with the error
+            //and log the activity the error came from.
+            Log.e(TAG, "Error received from: ${intent.getStringExtra("errorSource")}")
+            Log.e(TAG, "Error message: ${intent.getStringExtra("errorMessage")}")
+            Snackbar.make(
+                binding.root, intent.getStringExtra("errorMessage").toString(), Snackbar.LENGTH_LONG
+            ).show()
+        }
+
         ///On Click Handlers///
         binding.submitBtn.setOnClickListener {
             val userName = binding.etName.text.toString()

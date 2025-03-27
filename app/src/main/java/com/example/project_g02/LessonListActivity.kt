@@ -33,9 +33,12 @@ class LessonListActivity : AppCompatActivity(), ClickDetectInterface {
         gson = Gson()
 
         if (!isLogged()) {
-            Log.d(TAG, "User not logged in, sending back to login screen.")
             //If the user somehow ended up here without being logged in, send back to login screen
-            startActivity(Intent(this, MainActivity::class.java))
+            Log.e(TAG, "User not logged in, sending back to login screen.")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("errorMessage", "You must be logged in to access this page.")
+            intent.putExtra("errorSource", TAG)
+            startActivity(intent)
             finish()
         }
 
