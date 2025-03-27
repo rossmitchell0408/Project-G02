@@ -19,6 +19,6 @@ Import the project into your Android Studio install and use the default build co
 
 - Provide a user interface for the editing of included lessons.
 - Expand the lesson list system to allow for multiple lists.
-- Use [Firebase](firebase.google.com) or something similar to allow for online progress storage.
+- Use [Firebase](https://firebase.google.com) or something similar to allow for online progress storage.
 - Proper landscape mode and dark theme support.
 - Use resource strings instead of hard coded text for language support.
