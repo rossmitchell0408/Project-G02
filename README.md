@@ -2,9 +2,9 @@
 
 Our currently unnamed lesson tracker is a lightweight Android App that allows users to keep track of their progress in a pre-loaded HTML design course. While the applet only contains 5 lessons at the moment, more can be added with no hassle.
 
-Welcome Screen | Lesson List View
-:-------------:|:------------------:
-![A screenshot of the initial login screen.](LoginScreen.png "Welcome Screen") | ![A screenshot of the lesson list view with some lessons completed.](LessonList.png "Lesson List View")
+|                                 Welcome Screen                                 |                                            Lesson List View                                             |
+|:------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|
+| ![A screenshot of the initial login screen.](LoginScreen.png "Welcome Screen") | ![A screenshot of the lesson list view with some lessons completed.](LessonList.png "Lesson List View") |
 
 ## Technologies used
 
